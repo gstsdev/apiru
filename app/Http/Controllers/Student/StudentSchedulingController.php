@@ -130,7 +130,7 @@ class StudentSchedulingController extends Controller
             if($allowMealDay){ //verifica se tem alguma permissão cadastrada
                 switch ($dayWeek) { //verifica o dia da semana e monta um if para saber se existe permissão, se sim adiciona permission 1 (com permissão)
                     case 0:
-                        $permission = 1;
+                        $permission = 0;
                         break;
                     case 1:
                         if ($allowMealDay[0]->monday === 1) {

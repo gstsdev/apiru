@@ -55,7 +55,8 @@ class ScheduledMeal extends Notification implements ShouldQueue
 
         return (new WebPushMessage)
                     ->title("Reserva do '".$meal."'")
-                    ->body('Você tem uma reserva de \''.$meal.'\' para ' . $timeStart . '. Se não vai usá-la, essa é a hora de cancelar!');
+                    ->body('Você tem uma reserva de \''.$meal.'\' para ' . $timeStart . '. Se não vai usá-la, essa é a hora de cancelar!')
+                    ->data([ 'endpoint' => '/tickets' ]);
     }
 
     public function toArray() {

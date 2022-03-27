@@ -9,12 +9,14 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Hash;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 
 
 class User extends Authenticatable implements JWTSubject
 {
     //Relacionamento Feito
     use Notifiable;
+    use HasPushSubscriptions;
     protected $table = 'user';
     /**
      * The attributes that are mass assignable.

@@ -176,3 +176,6 @@ route::group(['prefix'=>'student/schedulings','middleware' => ['check.admin', 'c
     route::get('/allows-meal-by-day','Student\StudentSchedulingController@allowsMealByDay')->name('student.allowsMealByDay');
 });
 
+// Notificações Push
+
+Route::post('/push', 'PushController@store');

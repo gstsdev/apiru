@@ -8,6 +8,7 @@ use App\Course;
 use App\Http\Controllers\Controller;
 use App\Meal;
 use App\Menu;
+use App\Notifications\ScheduledMeal;
 use App\Scheduling;
 use App\Shift;
 use App\Student;
@@ -129,7 +130,7 @@ class StudentSchedulingController extends Controller
             if($allowMealDay){ //verifica se tem alguma permissão cadastrada
                 switch ($dayWeek) { //verifica o dia da semana e monta um if para saber se existe permissão, se sim adiciona permission 1 (com permissão)
                     case 0:
-                        $permission = 0;
+                        $permission = 1;
                         break;
                     case 1:
                         if ($allowMealDay[0]->monday === 1) {
@@ -221,6 +222,11 @@ class StudentSchedulingController extends Controller
         $scheduling->dateInsert = \date('Y-m-d');
 
         $scheduling->save();
+
+        $delay = new \DateTime( $request->date .' '. $meal->timeStart);
+        $delay->sub(new \DateInterval('PT1H'));
+
+        $user->notify((new ScheduledMeal($meal->description, $meal->timeStart))->delay($delay));
 
         return response()->json($scheduling, 200);
 
